@@ -36,6 +36,23 @@ public class PostRepository {
         em.remove(post);
     }
 
+    // 1. 비영속 (id가 부여되지 않음)
+    // new Post("title", "content");
+
+    // => persist()
+
+    // 2. 영속 (id가 부여됨)
+    // em.persist(post);
+
+    // => detach(), clear()
+
+    // 3. 준영속 (detached 수정하는중)
+    // em.detach(post)
+
+    // => merger() => 영속으로 돌아감
+
+    // 4. 삭제
+    // em.remove(post)
 
 }
 

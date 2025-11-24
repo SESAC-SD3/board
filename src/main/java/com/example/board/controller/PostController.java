@@ -41,6 +41,7 @@ public class PostController {
 
     @PostMapping
     public String create(@ModelAttribute Post post) {
+        // Post post = new Post("hi", "hello");
         postService.createPost(post);
         return "redirect:/posts";
     }
