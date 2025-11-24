@@ -18,8 +18,12 @@
         <tbody>
             <tr th:each="post : ${posts}">
                 <td th:text="${post.id}"></td>
-                <td th:text="${post.title}"></td>
-                <td th:tex="${post.createdAt}"></td>
+                <td>
+                    <a th:href="@{/posts/{id}(id=${post.id})}"
+                       th:text="${post.title}">
+                    </a>
+                </td>
+                <td th:text="${post.createdAt}"></td>
             </tr>
         </tbody>
     </table>

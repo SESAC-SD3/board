@@ -19,7 +19,7 @@ public class PostRepository {
 //        this.jdbcTemplate = jdbcTemplate;
 //    }
 
-    private final RowMapper<PostDto> rowMaaper = (rs, rowNum) -> {
+    private final RowMapper<PostDto> rowMapper = (rs, rowNum) -> {
         return new PostDto(
                 rs.getLong("id"),
                 rs.getString("title"),
@@ -31,7 +31,17 @@ public class PostRepository {
     // 전체 조회
     public List<PostDto> findAll() {
         String sql = "SELECT * FROM post";
-        return jdbcTemplate.query(sql, rowMaaper);
+        return jdbcTemplate.query(sql, rowMapper);
+    }
+
+    // 상세조회
+    public PostDto findById(Long id) {
+        String sql = "SELECT * FROM post WHERE id = ?";
+
+        // queryForObject => 단일 행 조회
+        PostDto post = jdbcTemplate.queryForObject(sql, rowMapper, id);
+
+        return post;
     }
 
 
