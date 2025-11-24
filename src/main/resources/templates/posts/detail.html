@@ -12,6 +12,8 @@
     <p th:text="${post.content}"></p>
 
     <a href="/posts">목록</a>
+    <a th:href="@{/posts/{id}/edit(id=${post.id})}">수정</a>
+    <a href="">삭제</a>
 
 
 

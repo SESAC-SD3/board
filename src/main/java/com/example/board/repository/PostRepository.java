@@ -49,6 +49,11 @@ public class PostRepository {
         jdbcTemplate.update(sql, postDto.getTitle(), postDto.getContent());
     }
 
+    public void update(Long id, PostDto postDto) {
+        String sql = "UPDATE post SET title = ?, content = ? WHERE id = ?";
+        jdbcTemplate.update(sql, postDto.getTitle(), postDto.getContent(), id);
+    }
+
 
 
 }

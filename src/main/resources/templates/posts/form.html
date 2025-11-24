@@ -7,7 +7,8 @@
 <body>
     <h1>FORM</h1>
 
-    <form action="/posts" th:object="${post}" method="post">
+    <form th:action="${post.id != null} ? @{/posts/{id}(id=${post.id})} : @{/posts}"
+          th:object="${post}" method="post">
         <label for="title">제목 : </label>
         <input type="text" th:field="*{title}" id="title">
 
