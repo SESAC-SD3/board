@@ -67,7 +67,23 @@ public class PostController {
         return "redirect:/posts";
     }
 
+    @GetMapping("/test/cache")
+    public String testCache() {
+        postService.testFirstLevelCache();
+        return "redirect:/posts";
+    }
 
+    @GetMapping("/test/write-behind")
+    public String testWriteBehind() {
+        postService.testWriteBehind();
+        return "redirect:/posts";
+    }
+
+    @GetMapping("/test/dirty-checking")
+    public String testDirtyChecking() {
+        postService.testDirtyChecking();
+        return "redirect:/posts";
+    }
 
 
 }
