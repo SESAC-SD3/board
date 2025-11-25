@@ -42,15 +42,21 @@
 
     <!--  페이지 네비게이션  -->
     <div>
+        <a th:href="@{/posts(page=0)}">first</a>
+
         <a th:if="${postPage.hasPrevious()}"
            th:href="@{/posts(page=${postPage.number-1})}">pre</a>
         
-        <span th:each="i : ${#numbers.sequence(0, postPage.totalPages - 1)}">
-            <a th:href="@{/posts(page=${i})}" th:text="${i}"></a>
+        <span th:each="i : ${#numbers.sequence(startPage, endPage)}">
+            <a th:if="${i != postPage.number}"
+               th:href="@{/posts(page=${i})}" th:text="${i+1}"></a>
+            <strong th:if="${i == postPage.number}" th:text="${i+1}"></strong>
         </span>
 
         <a th:if="${postPage.hasNext()}"
            th:href="@{/posts(page=${postPage.number+1})}">next</a>
+
+        <a th:href="@{/posts(page=${postPage.totalPages-1})}">last</a>
 
     </div>
 </body>
