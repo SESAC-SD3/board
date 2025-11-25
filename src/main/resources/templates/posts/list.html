@@ -14,6 +14,10 @@
         <input type="submit">
     </form>
 
+    <a th:href="@{/posts(page=0, sort='title,asc')}">제목순 정렬</a>
+    <a th:href="@{/posts(page=0, sort='id,desc')}">최신순 정렬</a>
+    <a th:href="@{/posts(page=0, sort='id,asc')}">오래된순 정렬</a>
+
     <table>
         <thead>
             <tr>
