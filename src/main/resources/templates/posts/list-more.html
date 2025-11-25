@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <table>
+        <tr th:each="post : ${postSlice.content}">
+            <td th:text="${post.id}"></td>
+            <td>
+                <a th:href="@{/posts/{id}(id=${post.id})}"
+                   th:text="${post.title}">
+                </a>
+            </td>
+            <td th:text="${post.createdAt}"></td>
+        </tr>
+    </table>
+
+    <a th:href="@{/posts/more(page=${postSlice.number+1})}"
+       th:if="${postSlice.hasNext()}"
+    >더보기</a>
+    <p th:unless="${postSlice.hasNext()}">마지막페이지입니다.</p>
+</body>
+</html>
