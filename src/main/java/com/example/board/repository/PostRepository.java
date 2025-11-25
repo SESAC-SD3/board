@@ -2,6 +2,7 @@ package com.example.board.repository;
 
 import java.util.List;
 import com.example.board.entity.Post;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -66,6 +67,26 @@ public interface PostRepository extends JpaRepository<Post, Long> {
         ORDER BY id DESC
     """, nativeQuery=true)
     List<Post> searchByTitleNative(@Param("keyword") String keyword);
+
+
+    // 1. query method
+    List<Post> findTop3ByOrderByCreatedAtDesc();
+
+    // 2. jpql
+    @Query("""
+        SELECT p FROM Post p
+        ORDER BY p.createdAt DESC
+    """)
+    List<Post> findRecentPosts(Pageable pageable);
+
+    // 3. native sql
+    @Query(value= """
+        SELECT * FROM post
+        ORDER BY created_at DESC
+        LIMIT 4
+    """, nativeQuery = true)
+    List<Post> findRecentPostsNative();
+
 }
 
 

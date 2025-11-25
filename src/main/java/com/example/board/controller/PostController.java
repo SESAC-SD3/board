@@ -97,6 +97,12 @@ public class PostController {
     // 최근 게시물 3개만 출력
     // /posts/recent
 
+    @GetMapping("/recent")
+    public String recent(Model model) {
+        model.addAttribute("posts", postService.getRecentPosts());
+        return "posts/list";
+    }
+
 
 
 }
