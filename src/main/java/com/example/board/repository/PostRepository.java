@@ -26,5 +26,28 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     // long count();
     // 존재 여부 확인
     // boolean existsById(Long id);
+
+    // findBy + 필드명 + 조건
+
+    // LIKE %keyword%
     List<Post> findByTitleContaining(String keyword);
+
+    // LIKE keyword%
+    List<Post> findByTitleStartingWith(String keyword);
+
+    // >
+    List<Post> findByIdGreaterThan(Long id);
+
+    // ORDER BY id DESC
+    List<Post> findAllByOrderByIdDesc();
 }
+
+
+
+
+
+
+
+
+
+

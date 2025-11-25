@@ -39,9 +39,10 @@ public class PostService {
 
 
     public List<Post> getAllPosts() {
-        return postRepository.findAll(
-                Sort.by(Sort.Direction.DESC, "id")
-        );
+//        return postRepository.findAll(
+//                Sort.by(Sort.Direction.DESC, "id")
+//        );
+        return postRepository.findAllByOrderByIdDesc();
     }
 
     @Transactional
