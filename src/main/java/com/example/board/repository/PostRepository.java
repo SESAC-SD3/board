@@ -91,6 +91,8 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     // List<Post> findAll() => JpaRepository가 구현 해둔 메소드
     // 오버로딩 (동일한 이름이지만 매개변수가 다름)
     Page<Post> findAll(Pageable pageable);
+
+    Page<Post> findByTitleContaining(String keyword, Pageable pageable);
 }
 
 

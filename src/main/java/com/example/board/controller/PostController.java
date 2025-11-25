@@ -111,10 +111,23 @@ public class PostController {
     }
 
     @GetMapping("/search")
-    public String search(@RequestParam String keyword, Model model) {
-        List<Post> posts = postService.searchPostsByTitleOrContent(keyword);
-        model.addAttribute("posts", posts);
-        return "posts/list";
+    public String search(
+            @RequestParam String keyword,
+            @PageableDefault(sort="id") Pageable pageable,
+            Model model
+    ) {
+        Page<Post> postPage = postService.searchPostsPage(keyword, pageable);
+
+        int currentPage = postPage.getNumber();
+        int totalPages = postPage.getTotalPages();
+        int startPage = Math.max(0, currentPage - 5);
+        int endPage = Math.min(totalPages - 1, currentPage + 5);
+
+        model.addAttribute("postPage", postPage);
+        model.addAttribute("startPage", startPage);
+        model.addAttribute("endPage", endPage);
+        model.addAttribute("keyword", keyword);
+        return "posts/search";
     }
 
     // 최근 게시물 3개만 출력

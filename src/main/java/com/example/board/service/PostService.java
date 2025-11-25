@@ -128,6 +128,10 @@ public class PostService {
         }
     }
 
+    public Page<Post> searchPostsPage(String keyword, Pageable pageable) {
+        return postRepository.findByTitleContaining(keyword, pageable);
+    }
+
 }
 
 
