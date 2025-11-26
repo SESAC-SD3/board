@@ -60,9 +60,11 @@ public class PostController {
     @GetMapping("/{id}")
     public String detail(@PathVariable Long id, Model model) {
         Post post = postService.getPostById(id);
+        List<Comment> comments = commentService.getCommentsByPostId(id);
 
         model.addAttribute("comment", new CommentDto());
         model.addAttribute("post", post);
+        model.addAttribute("comments", comments);
         return "posts/detail";
     }
 
