@@ -1,8 +1,11 @@
 package com.example.board.controller;
 
+import com.example.board.dto.CommentDto;
 import com.example.board.dto.PostDto;
+import com.example.board.entity.Comment;
 import com.example.board.entity.Post;
 import com.example.board.repository.PostRepository;
+import com.example.board.service.CommentService;
 import com.example.board.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -21,10 +24,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PostController {
     private final PostService postService;
+    private final CommentService commentService;
 //    private final PostRepository postRepository;
 
 //    public PostController(PostRepository postRepository) {
 //        this.postRepository = postRepository;
+//        this.commentService = commentService;
 //    }
 
     @GetMapping
@@ -55,6 +60,8 @@ public class PostController {
     @GetMapping("/{id}")
     public String detail(@PathVariable Long id, Model model) {
         Post post = postService.getPostById(id);
+
+        model.addAttribute("comment", new CommentDto());
         model.addAttribute("post", post);
         return "posts/detail";
     }
@@ -154,6 +161,17 @@ public class PostController {
         Slice<Post> postSlice = postService.getPostsSlice(pageable);
         model.addAttribute("postSlice", postSlice);
         return "posts/list-more";
+    }
+
+
+    // Comment
+    @PostMapping("/{postId}/comments")
+    public String createComment(
+            @PathVariable Long postId,
+            @ModelAttribute Comment comment
+    ) {
+        commentService.createComment(postId, comment);
+        return "redirect:/posts/" + postId;
     }
 
 
