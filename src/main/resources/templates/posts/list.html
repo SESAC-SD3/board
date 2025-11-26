@@ -31,7 +31,7 @@
                 <td th:text="${post.id}"></td>
                 <td>
                     <a th:href="@{/posts/{id}(id=${post.id})}"
-                       th:text="${post.title}">
+                       th:text="${post.title} + '(' + ${#lists.size(post.comments)} + ')'">
                     </a>
                 </td>
                 <td th:text="${post.createdAt}"></td>
