@@ -20,8 +20,18 @@ public class CommentService {
     @Transactional
     public Comment createComment(Long postId, Comment comment) {
         Post post = postService.getPostById(postId);
-        comment.setPost(post);
-        return commentRepository.save(comment);
+
+        System.out.println("==== 댓글 추가전====");
+        System.out.println("댓글 수 : " + post.getComments().size());
+
+//        comment.setPost(post);
+        post.addComment(comment);
+        Comment saved = commentRepository.save(comment);
+
+        System.out.println("==== 댓글 추가후 ====");
+        System.out.println("댓글 수 : " + post.getComments().size());
+
+        return saved;
     }
 
     public List<Comment> getCommentsByPostId(Long postId) {
