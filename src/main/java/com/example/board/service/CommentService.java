@@ -42,6 +42,11 @@ public class CommentService {
     public void deleteComment(Long commentId) {
         Comment comment = commentRepository.findById(commentId)
                 .orElseThrow();
+
+        // 고아 객체 삭제
+//        Post post = comment.getPost();
+//        post.removeComment(comment);
+
         commentRepository.delete(comment);
     }
 }
