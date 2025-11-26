@@ -186,5 +186,19 @@ public class PostController {
         return "redirect:/posts/" + postId;
     }
 
+    @GetMapping("/fetch-join")
+    public String listWithFetchJoin(Model model) {
+        List<Post> posts = postService.getAllPostsWithFetchJoin();
+        model.addAttribute("posts", posts);
+        return "posts/list-test";
+    }
+
+    @GetMapping("/entity-graph")
+    public String listWithEntityGraph(Model model) {
+        List<Post> posts = postService.getAllPostsWithEntityGraph();
+        model.addAttribute("posts", posts);
+        return "posts/list-test";
+    }
+
 
 }

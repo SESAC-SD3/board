@@ -133,6 +133,15 @@ public class PostService {
         return postRepository.findAllBy(pageable);
     }
 
+    public List<Post> getAllPostsWithFetchJoin() {
+//        return postRepository.findAll();
+        return postRepository.findAllWithComments();
+    }
+
+    public List<Post> getAllPostsWithEntityGraph() {
+        return postRepository.findAllWithCommentsEntityGraph();
+    }
+
 }
 
 
